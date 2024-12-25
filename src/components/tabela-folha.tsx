@@ -253,7 +253,7 @@ export function TabelaFolha({ dados, competencia, onCompetenciaChange }: TabelaF
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Competência
@@ -263,106 +263,108 @@ export function TabelaFolha({ dados, competencia, onCompetenciaChange }: TabelaF
             onCompetenciaChange={onCompetenciaChange}
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-1 w-full lg:w-auto">
           <button
             onClick={exportarCSV}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
           >
-            <DocumentArrowDownIcon className="h-5 w-5 mr-1" />
-            CSV
+            <DocumentArrowDownIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">CSV</span>
           </button>
           <button
             onClick={exportarXLSX}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-400 transition-colors"
           >
-            <TableCellsIcon className="h-5 w-5 mr-1" />
-            XLSX
+            <TableCellsIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">XLSX</span>
           </button>
           <button
             onClick={exportarTXT}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors"
           >
-            <DocumentTextIcon className="h-5 w-5 mr-1" />
-            TXT
+            <DocumentTextIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">TXT</span>
           </button>
           <button
             onClick={exportarPDF}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-400 transition-colors"
           >
-            <DocumentIcon className="h-5 w-5 mr-1" />
-            PDF
+            <DocumentIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">PDF</span>
           </button>
           <button
             onClick={exportarJSON}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-gray-600 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-gray-600 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-400 transition-colors"
           >
-            <CodeBracketIcon className="h-5 w-5 mr-1" />
-            JSON
+            <CodeBracketIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">JSON</span>
           </button>
           <button
             onClick={imprimir}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-purple-600 dark:bg-purple-500 hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
+            className="flex-1 lg:flex-none inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-purple-600 dark:bg-purple-500 hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
           >
-            <PrinterIcon className="h-5 w-5 mr-1" />
-            Imprimir
+            <PrinterIcon className="h-5 w-5 lg:mr-1" />
+            <span className="hidden lg:inline">Imprimir</span>
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border dark:border-gray-700">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-800">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer"
-                    onClick={header.column.getToggleSortingHandler()}
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-            {table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                className="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
-                onClick={() => setServidorSelecionado(row.original)}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="overflow-x-auto -mx-4 sm:mx-0 rounded-lg border dark:border-gray-700">
+        <div className="inline-block min-w-full align-middle">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-800">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer whitespace-nowrap"
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              {table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  className="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+                  onClick={() => setServidorSelecionado(row.original)}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className="px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100 whitespace-nowrap"
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="px-3 py-1 rounded border dark:border-gray-700 disabled:opacity-50"
+            className="inline-flex items-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </button>
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="px-3 py-1 rounded border dark:border-gray-700 disabled:opacity-50"
+            className="inline-flex items-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
           >
             <ChevronRightIcon className="h-5 w-5" />
           </button>

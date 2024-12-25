@@ -50,11 +50,11 @@ export function DetalhesModal({ servidor, onClose }: DetalhesModalProps) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 px-4 pb-4 pt-5 text-left shadow-xl transition-all w-[960px]">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:w-[960px] w-full mx-4">
                 <div className="absolute right-0 top-0 pr-4 pt-4">
                   <button
                     type="button"
-                    className="rounded-md bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-500 focus:outline-none"
+                    className="rounded-md bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none"
                     onClick={onClose}
                   >
                     <span className="sr-only">Fechar</span>
@@ -66,7 +66,7 @@ export function DetalhesModal({ servidor, onClose }: DetalhesModalProps) {
                     <Dialog.Title as="h3" className="text-lg font-semibold leading-6 text-gray-900 dark:text-white mb-6">
                       Detalhes do Servidor
                     </Dialog.Title>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -262,48 +262,48 @@ export function DetalhesModal({ servidor, onClose }: DetalhesModalProps) {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 flex justify-end gap-2">
+                    <div className="mt-6 flex flex-wrap justify-end gap-2">
                       <button
                         onClick={() => exportarCSV(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
                       >
-                        <DocumentArrowDownIcon className="h-5 w-5 mr-1" />
-                        CSV
+                        <DocumentArrowDownIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">CSV</span>
                       </button>
                       <button
                         onClick={() => exportarXLSX(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-400 transition-colors"
                       >
-                        <TableCellsIcon className="h-5 w-5 mr-1" />
-                        XLSX
+                        <TableCellsIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">XLSX</span>
                       </button>
                       <button
                         onClick={() => exportarTXT(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors"
                       >
-                        <DocumentTextIcon className="h-5 w-5 mr-1" />
-                        TXT
+                        <DocumentTextIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">TXT</span>
                       </button>
                       <button
                         onClick={() => exportarPDF(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-400 transition-colors"
                       >
-                        <DocumentIcon className="h-5 w-5 mr-1" />
-                        PDF
+                        <DocumentIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">PDF</span>
                       </button>
                       <button
                         onClick={() => exportarJSON(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-gray-600 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-gray-600 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-400 transition-colors"
                       >
-                        <CodeBracketIcon className="h-5 w-5 mr-1" />
-                        JSON
+                        <CodeBracketIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">JSON</span>
                       </button>
                       <button
                         onClick={() => imprimir(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-purple-600 dark:bg-purple-500 hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-purple-600 dark:bg-purple-500 hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
                       >
-                        <PrinterIcon className="h-5 w-5 mr-1" />
-                        Imprimir
+                        <PrinterIcon className="h-5 w-5 sm:mr-1" />
+                        <span className="hidden sm:inline">Imprimir</span>
                       </button>
                     </div>
                   </div>

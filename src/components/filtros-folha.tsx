@@ -53,22 +53,22 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
       );
 
   return (
-    <div className="grid grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Nome
         </label>
         <input
           type="text"
           value={filtros.nome}
           onChange={(e) => handleFiltrosChange("nome", e.target.value)}
-          className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-white"
+          className="block w-full rounded-lg border-0 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 shadow-sm hover:bg-white dark:hover:bg-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all sm:text-sm sm:leading-6 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2"
           placeholder="Filtrar por nome"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Cargo
         </label>
         <Combobox
@@ -83,25 +83,25 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
             onBlur={() => setTimeout(() => setIsCargoOpen(false), 200)}
           >
             <Combobox.Input
-              className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-white"
+              className="block w-full rounded-lg border-0 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 shadow-sm hover:bg-white dark:hover:bg-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all sm:text-sm sm:leading-6 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2"
               onChange={(event) => setCargoQuery(event.target.value)}
               placeholder="Selecione um cargo"
               displayValue={(cargo: string) => cargo || ""}
             />
-            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center px-2">
-              <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 dark:text-gray-500">
+              <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
 
           {isCargoOpen && (
-            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white dark:bg-gray-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               <Combobox.Option
                 key="todos"
                 value=""
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                  `relative cursor-default select-none px-4 py-2 ${
                     active
-                      ? "bg-indigo-600 text-white"
+                      ? "bg-indigo-500 text-white"
                       : "text-gray-900 dark:text-white"
                   }`
                 }
@@ -113,9 +113,9 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
                   key={cargo}
                   value={cargo}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                    `relative cursor-default select-none px-4 py-2 ${
                       active
-                        ? "bg-indigo-600 text-white"
+                        ? "bg-indigo-500 text-white"
                         : "text-gray-900 dark:text-white"
                     }`
                   }
@@ -129,13 +129,13 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Vínculo
         </label>
         <select
           value={filtros.vinculo}
           onChange={(e) => handleFiltrosChange("vinculo", e.target.value)}
-          className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-white"
+          className="block w-full rounded-lg border-0 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 shadow-sm hover:bg-white dark:hover:bg-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all sm:text-sm sm:leading-6 px-3 py-2"
         >
           <option value="">Todos</option>
           {vinculoOptions.map((vinculo) => (
@@ -147,13 +147,13 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Lotação
         </label>
         <select
           value={filtros.lotacao}
           onChange={(e) => handleFiltrosChange("lotacao", e.target.value)}
-          className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-white"
+          className="block w-full rounded-lg border-0 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 shadow-sm hover:bg-white dark:hover:bg-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all sm:text-sm sm:leading-6 px-3 py-2"
         >
           <option value="">Todas</option>
           {lotacaoOptions.map((lotacao) => (
