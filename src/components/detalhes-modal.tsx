@@ -11,18 +11,12 @@ import {
   CodeBracketIcon,
   PrinterIcon,
 } from "@heroicons/react/20/solid";
-import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarODT, exportarJSON, imprimir } from "@/utils/export-utils";
+import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarODT, exportarJSON, imprimir, formatarData } from "@/utils/export-utils";
 
 interface DetalhesModalProps {
   servidor: any;
   onClose: () => void;
 }
-
-const formatarData = (data: string) => {
-  if (!data) return "-";
-  const [ano, mes, dia] = data.split("-");
-  return `${dia}/${mes}/${ano}`;
-};
 
 const formatarCPF = (cpf: string) => {
   return `***.***.***-${cpf.slice(-2)}`;

@@ -25,7 +25,7 @@ interface Servidor {
   anoReferencia: number;
 }
 
-const formatarData = (data: string) => {
+export const formatarData = (data: string) => {
   if (!data) return "-";
   const [ano, mes, dia] = data.split("-");
   return `${dia}/${mes}/${ano}`;
@@ -58,19 +58,27 @@ const camposOrdenados = [
 ];
 
 export const exportarCSV = (servidor: Servidor) => {
-  const dadosExportacao = camposOrdenados.map(({ chave, label }) => ({
-    [label]: servidor[chave as keyof Servidor],
-  }));
-  const csv = Object.entries(dadosExportacao[0])
-    .map(([key, value]) => `${key},${value}`)
-    .join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const dadosExportacao = camposOrdenados.reduce((acc, { chave, label, formato }) => {
+    const valor = servidor[chave as keyof Servidor];
+    acc[label] = formato ? formato(valor) : valor;
+    return acc;
+  }, {} as Record<string, any>);
+
+  const headers = Object.keys(dadosExportacao);
+  const linhas = [
+    headers.map(h => `"${h}"`).join(","),
+    headers.map(h => `"${dadosExportacao[h]}"`).join(",")
+  ].join("\n");
+
+  const bom = "\uFEFF";
+  const blob = new Blob([bom + linhas], { type: "text/csv;charset=utf-8;" });
   saveAs(blob, `${servidor.nome}_dados.csv`);
 };
 
 export const exportarXLSX = (servidor: Servidor) => {
-  const dadosExportacao = camposOrdenados.reduce((acc, { chave, label }) => {
-    acc[label] = servidor[chave as keyof Servidor];
+  const dadosExportacao = camposOrdenados.reduce((acc, { chave, label, formato }) => {
+    const valor = servidor[chave as keyof Servidor];
+    acc[label] = formato ? formato(valor) : valor;
     return acc;
   }, {} as Record<string, any>);
   
@@ -127,8 +135,9 @@ export const exportarODT = (servidor: Servidor) => {
 };
 
 export const exportarJSON = (servidor: Servidor) => {
-  const dadosExportacao = camposOrdenados.reduce((acc, { chave, label }) => {
-    acc[label] = servidor[chave as keyof Servidor];
+  const dadosExportacao = camposOrdenados.reduce((acc, { chave, label, formato }) => {
+    const valor = servidor[chave as keyof Servidor];
+    acc[label] = formato ? formato(valor) : valor;
     return acc;
   }, {} as Record<string, any>);
 
