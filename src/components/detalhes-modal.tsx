@@ -11,7 +11,7 @@ import {
   CodeBracketIcon,
   PrinterIcon,
 } from "@heroicons/react/20/solid";
-import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarODT, exportarJSON, imprimir, formatarData } from "@/utils/export-utils";
+import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarJSON, imprimir, formatarData } from "@/utils/export-utils";
 
 interface DetalhesModalProps {
   servidor: any;
@@ -289,13 +289,6 @@ export function DetalhesModal({ servidor, onClose }: DetalhesModalProps) {
                       >
                         <DocumentIcon className="h-5 w-5 mr-1" />
                         PDF
-                      </button>
-                      <button
-                        onClick={() => exportarODT(servidor)}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700"
-                      >
-                        <DocumentTextIcon className="h-5 w-5 mr-1" />
-                        ODT
                       </button>
                       <button
                         onClick={() => exportarJSON(servidor)}

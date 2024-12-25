@@ -25,7 +25,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarODT, exportarJSON, imprimir } from "@/utils/export-utils";
+import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarJSON, imprimir } from "@/utils/export-utils";
 
 interface Servidor {
   nome: string;
@@ -186,119 +186,6 @@ export function TabelaFolha({ dados, competencia, onCompetenciaChange }: TabelaF
     doc.save(`folha_pagamento_${competencia}.pdf`);
   };
 
-  const exportarODT = () => {
-    const styles = `
-      <?xml version="1.0" encoding="UTF-8"?>
-      <office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
-                              xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
-                              xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
-                              xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
-                              xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
-        <office:automatic-styles>
-          <style:style style:name="Table1" style:family="table">
-            <style:table-properties style:width="17cm" table:align="margins"/>
-          </style:style>
-          <style:style style:name="Table1.A" style:family="table-column">
-            <style:table-column-properties style:column-width="4cm"/>
-          </style:style>
-          <style:style style:name="Table1.A1" style:family="table-cell">
-            <style:table-cell-properties fo:background-color="#f3f4f6" fo:padding="0.1cm" fo:border="0.05pt solid #000000"/>
-            <style:paragraph-properties fo:text-align="left" fo:margin-left="0cm"/>
-          </style:style>
-          <style:style style:name="Table1.B1" style:family="table-cell">
-            <style:table-cell-properties fo:padding="0.1cm" fo:border="0.05pt solid #000000"/>
-            <style:paragraph-properties fo:text-align="left" fo:margin-left="0cm"/>
-          </style:style>
-          <style:style style:name="P1" style:family="paragraph">
-            <style:paragraph-properties fo:margin-bottom="0.5cm"/>
-          </style:style>
-          <style:style style:name="P2" style:family="paragraph">
-            <style:paragraph-properties fo:margin-bottom="1cm"/>
-            <style:text-properties fo:font-size="16pt" fo:font-weight="bold"/>
-          </style:style>
-        </office:automatic-styles>
-        <office:body>
-          <office:text>
-            <text:p text:style-name="P2">Folha de Pagamento - ${competencia}</text:p>
-            ${dados.map(servidor => `
-              <text:p text:style-name="P1">
-                <text:span text:style-name="Bold">Servidor:</text:span> ${servidor.nome}
-              </text:p>
-              <table:table table:name="Table1" table:style-name="Table1">
-                <table:table-column table:style-name="Table1.A"/>
-                <table:table-column table:style-name="Table1.A"/>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>CPF</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.cpf}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Matrícula</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.matricula}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Cargo</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.cargo}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Função</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.funcao || "-"}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Vínculo</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.vinculo}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Lotação</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.lotacao}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Forma de Contratação</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.formaContratacao}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Carga Horária</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.cargaHoraria}h</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Data de Admissão</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${formatarData(servidor.dataAdmissao)}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Data de Exoneração</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${formatarData(servidor.dataExoneracao)}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Valor Bruto</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.valorBruto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Proventos Adicionais</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.proventosAdicionais.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Descontos</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.descontos.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Valor Líquido</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.valorLiquido.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</text:p></table:table-cell>
-                </table:table-row>
-                <table:table-row>
-                  <table:table-cell table:style-name="Table1.A1"><text:p>Competência</text:p></table:table-cell>
-                  <table:table-cell table:style-name="Table1.B1"><text:p>${servidor.competenciaMensal}</text:p></table:table-cell>
-                </table:table-row>
-              </table:table>
-              <text:p text:style-name="P1"/>
-            `).join("")}
-          </office:text>
-        </office:body>
-      </office:document-content>
-    `;
-
-    const blob = new Blob([styles], { type: "application/vnd.oasis.opendocument.text" });
-    saveAs(blob, `folha_pagamento_${competencia}.odt`);
-  };
-
   const exportarJSON = () => {
     const dadosExportacao = dados.map((servidor) =>
       columns.reduce((acc, col) => {
@@ -414,13 +301,6 @@ export function TabelaFolha({ dados, competencia, onCompetenciaChange }: TabelaF
           >
             <DocumentIcon className="h-5 w-5 mr-1" />
             PDF
-          </button>
-          <button
-            onClick={exportarODT}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700"
-          >
-            <DocumentTextIcon className="h-5 w-5 mr-1" />
-            ODT
           </button>
           <button
             onClick={exportarJSON}

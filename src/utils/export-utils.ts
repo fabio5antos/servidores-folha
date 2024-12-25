@@ -116,22 +116,21 @@ export const exportarODT = (servidor: Servidor) => {
   const conteudo = camposOrdenados
     .map(({ chave, label, formato }) => {
       const valor = servidor[chave as keyof Servidor];
-      return `<text:p text:style-name="Standard">${label}: ${formato ? formato(valor) : valor}</text:p>`;
+      return `${label}: ${formato ? formato(valor) : valor}\\par`;
     })
     .join("\n");
 
-  const template = `<?xml version="1.0" encoding="UTF-8"?>
-<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
-  <office:body>
-    <office:text>
-      <text:p text:style-name="Title">Dados do Servidor</text:p>
-      ${conteudo}
-    </office:text>
-  </office:body>
-</office:document-content>`;
+  const rtfTemplate = `{\\rtf1\\ansi\\deff0
+{\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}}
+{\\colortbl;\\red0\\green0\\blue0;}
+\\viewkind4\\uc1\\pard\\cf1\\f0\\fs24
+{\\b\\fs28 Dados do Servidor}\\par
+\\par
+${conteudo}
+}`;
 
-  const blob = new Blob([template], { type: "application/vnd.oasis.opendocument.text" });
-  saveAs(blob, `${servidor.nome}_dados.odt`);
+  const blob = new Blob([rtfTemplate], { type: "application/rtf" });
+  saveAs(blob, `${servidor.nome}_dados.rtf`);
 };
 
 export const exportarJSON = (servidor: Servidor) => {
