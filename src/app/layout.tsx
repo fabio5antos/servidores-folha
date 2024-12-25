@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { NavMenu } from "@/components/nav-menu";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sistema de Folha de Pagamento",
-  description: "Sistema de exibição de folhas de pagamento de servidores públicos",
+  title: "Portal da Transparência - Prefeitura de Serra Clara",
+  description: "Portal da Transparência da Prefeitura Municipal de Serra Clara",
 };
 
 export default function RootLayout({
@@ -17,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -26,7 +28,11 @@ export default function RootLayout({
           storageKey="theme-preference"
           disableTransitionOnChange
         >
-          {children}
+          <NavMenu />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
