@@ -12,9 +12,10 @@ import {
   PrinterIcon,
 } from "@heroicons/react/20/solid";
 import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarJSON, imprimir, formatarData } from "@/utils/export-utils";
+import { Servidor } from "@/types/servidor";
 
 interface DetalhesModalProps {
-  servidor: any;
+  servidor: Servidor;
   onClose: () => void;
 }
 

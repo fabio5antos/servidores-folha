@@ -1,12 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Combobox } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { Servidor } from "@/types/servidor";
 
 interface FiltrosFolhaProps {
-  dados: any[];
-  onFiltrosChange: (filtros: Record<string, string>) => void;
+  dados: Servidor[];
+  onFiltrosChange: (filtros: {
+    nome: string;
+    cargo: string;
+    vinculo: string;
+    lotacao: string;
+  }) => void;
 }
 
 export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
@@ -34,19 +40,17 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
     setLotacaoOptions(lotacoes);
   }, [dados]);
 
+  const handleFiltrosChange = useCallback((campo: string, valor: string) => {
+    const novosFiltros = { ...filtros, [campo]: valor };
+    setFiltros(novosFiltros);
+    onFiltrosChange(novosFiltros);
+  }, [filtros, onFiltrosChange]);
+
   const cargosFiltrados = cargoQuery === ""
     ? cargoOptions
     : cargoOptions.filter((cargo) =>
         cargo.toLowerCase().includes(cargoQuery.toLowerCase())
       );
-
-  const handleFiltrosChange = useCallback((campo: string, valor: string) => {
-    setFiltros((prev) => {
-      const novosFiltros = { ...prev, [campo]: valor };
-      onFiltrosChange(novosFiltros);
-      return novosFiltros;
-    });
-  }, [onFiltrosChange]);
 
   return (
     <div className="grid grid-cols-4 gap-4 mb-6">
@@ -76,12 +80,13 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
           <div
             className="relative w-full"
             onClick={() => setIsCargoOpen(true)}
-            onBlur={() => setIsCargoOpen(false)}
+            onBlur={() => setTimeout(() => setIsCargoOpen(false), 200)}
           >
             <Combobox.Input
               className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-white"
               onChange={(event) => setCargoQuery(event.target.value)}
               placeholder="Selecione um cargo"
+              displayValue={(cargo: string) => cargo || ""}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center px-2">
               <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -90,6 +95,19 @@ export function FiltrosFolha({ dados, onFiltrosChange }: FiltrosFolhaProps) {
 
           {isCargoOpen && (
             <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Combobox.Option
+                key="todos"
+                value=""
+                className={({ active }) =>
+                  `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                    active
+                      ? "bg-indigo-600 text-white"
+                      : "text-gray-900 dark:text-white"
+                  }`
+                }
+              >
+                Todos
+              </Combobox.Option>
               {cargosFiltrados.map((cargo) => (
                 <Combobox.Option
                   key={cargo}

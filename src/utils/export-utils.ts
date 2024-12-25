@@ -2,28 +2,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-
-interface Servidor {
-  id: number;
-  cpf: string;
-  matricula: number;
-  nome: string;
-  vinculo: string;
-  cargo: string;
-  funcao: string;
-  lotacao: string;
-  formaContratacao: string;
-  cargaHoraria: number;
-  dataAdmissao: string;
-  dataExoneracao: string | null;
-  valorBruto: number;
-  proventosAdicionais: number;
-  descontos: number;
-  valorLiquido: number;
-  competenciaMensal: string;
-  mesReferencia: number;
-  anoReferencia: number;
-}
+import { Servidor } from "@/types/servidor";
 
 export const formatarData = (data: string) => {
   if (!data) return "-";
@@ -38,7 +17,13 @@ const formatarDinheiro = (valor: number) => {
   });
 };
 
-const camposOrdenados = [
+type CampoServidor = {
+  chave: keyof Servidor;
+  label: string;
+  formato?: (valor: any) => string;
+};
+
+const camposOrdenados: CampoServidor[] = [
   { chave: "nome", label: "Nome" },
   { chave: "cpf", label: "CPF" },
   { chave: "matricula", label: "Matrícula" },

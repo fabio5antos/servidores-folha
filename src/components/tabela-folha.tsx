@@ -21,21 +21,11 @@ import {
 } from "@heroicons/react/20/solid";
 import { DetalhesModal } from "./detalhes-modal";
 import { SeletorCompetencia } from "./seletor-competencia";
+import { Servidor } from "@/types/servidor";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { exportarCSV, exportarXLSX, exportarTXT, exportarPDF, exportarJSON, imprimir } from "@/utils/export-utils";
-
-interface Servidor {
-  nome: string;
-  cargo: string;
-  vinculo: string;
-  valorBruto: number;
-  valorLiquido: number;
-  cargaHoraria: number;
-  [key: string]: any;
-}
 
 interface TabelaFolhaProps {
   dados: Servidor[];

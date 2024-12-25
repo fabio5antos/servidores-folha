@@ -6,11 +6,12 @@ import { SeletorCompetencia } from "./seletor-competencia";
 import { ThemeToggle } from "./theme-toggle";
 import { Content } from "./content";
 import { FiltrosFolha } from "./filtros-folha";
+import { Servidor } from "@/types/servidor";
 
 export function FolhaPagamento() {
   const [competencia, setCompetencia] = useState<string>("");
-  const [dados, setDados] = useState<any[]>([]);
-  const [dadosFiltrados, setDadosFiltrados] = useState<any[]>([]);
+  const [dados, setDados] = useState<Servidor[]>([]);
+  const [dadosFiltrados, setDadosFiltrados] = useState<Servidor[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
