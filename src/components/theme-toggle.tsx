@@ -20,17 +20,17 @@ export function ThemeToggle() {
     return null;
   }
 
-  return (
-    <button
-      onClick={toggleTheme}
-      className="fixed bottom-4 right-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all z-50"
-      aria-label="Alternar tema"
-    >
-      {resolvedTheme === "dark" ? (
-        <SunIcon className="h-6 w-6" />
-      ) : (
-        <MoonIcon className="h-6 w-6" />
-      )}
-    </button>
-  );
+//   return (
+//     <button
+//       onClick={toggleTheme}
+//       className="fixed bottom-4 right-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all z-50"
+//       aria-label="Alternar tema"
+//     >
+//       {resolvedTheme === "dark" ? (
+//         <SunIcon className="h-6 w-6" />
+//       ) : (
+//         <MoonIcon className="h-6 w-6" />
+//       )}
+//     </button>
+//   );
 } 
