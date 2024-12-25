@@ -115,8 +115,8 @@ export function NavMenu() {
                 </Disclosure.Button>
               </div>
             </div>
-            <div className="hidden min-[920px]:flex min-[920px]:justify-center border-t border-gray-200 dark:border-gray-700 overflow-x-auto">
-              <div className="flex space-x-1 sm:space-x-2 md:space-x-3 lg:space-x-4 py-1">
+            <div className="hidden min-[920px]:flex min-[920px]:justify-center border-t border-gray-200 dark:border-gray-700">
+              <div className="flex space-x-1 sm:space-x-2 md:space-x-3 lg:space-x-4 py-1 overflow-x-auto">
                 {navigation.map((item) => (
                   <Fragment key={item.name}>
                     {item.items ? (
@@ -140,7 +140,7 @@ export function NavMenu() {
                               leaveFrom="transform opacity-100 scale-100"
                               leaveTo="transform opacity-0 scale-95"
                             >
-                              <Menu.Items className="absolute left-0 z-10 mt-1 w-56 origin-top-left rounded-md bg-white dark:bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Items className="fixed z-50 mt-2 w-56 origin-top-left rounded-md bg-white dark:bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {item.items.map((subItem) => (
                                   <Menu.Item key={subItem.name}>
                                     {({ active }) => (
