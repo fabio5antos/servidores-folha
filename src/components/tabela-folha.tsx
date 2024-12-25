@@ -276,42 +276,42 @@ export function TabelaFolha({ dados, competencia, onCompetenciaChange }: TabelaF
         <div className="flex gap-2">
           <button
             onClick={exportarCSV}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
           >
             <DocumentArrowDownIcon className="h-5 w-5 mr-1" />
             CSV
           </button>
           <button
             onClick={exportarXLSX}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-400 transition-colors"
           >
             <TableCellsIcon className="h-5 w-5 mr-1" />
             XLSX
           </button>
           <button
             onClick={exportarTXT}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 transition-colors"
           >
             <DocumentTextIcon className="h-5 w-5 mr-1" />
             TXT
           </button>
           <button
             onClick={exportarPDF}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-400 transition-colors"
           >
             <DocumentIcon className="h-5 w-5 mr-1" />
             PDF
           </button>
           <button
             onClick={exportarJSON}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-gray-600 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-400 transition-colors"
           >
             <CodeBracketIcon className="h-5 w-5 mr-1" />
             JSON
           </button>
           <button
             onClick={imprimir}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white dark:text-gray-100 bg-purple-600 dark:bg-purple-500 hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
           >
             <PrinterIcon className="h-5 w-5 mr-1" />
             Imprimir
