@@ -5,34 +5,31 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
   if (!mounted) {
-    return (
-      <button
-        className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        aria-label="Alternar tema"
-      >
-        <div className="h-5 w-5" />
-      </button>
-    );
+    return null;
   }
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      onClick={toggleTheme}
+      className="fixed bottom-4 right-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all z-50"
       aria-label="Alternar tema"
     >
-      {theme === "dark" ? (
-        <SunIcon className="h-5 w-5" />
+      {resolvedTheme === "dark" ? (
+        <SunIcon className="h-6 w-6" />
       ) : (
-        <MoonIcon className="h-5 w-5" />
+        <MoonIcon className="h-6 w-6" />
       )}
     </button>
   );

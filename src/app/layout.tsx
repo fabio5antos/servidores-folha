@@ -20,8 +20,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
+          forcedTheme={undefined}
+          storageKey="theme-preference"
           disableTransitionOnChange
         >
           {children}
